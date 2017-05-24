@@ -38,7 +38,7 @@ def read_data():
         # by whitespace
         line = ser.readline().decode('UTF-8').split()
         temperature = float(line[0])
-        print('Temperature: {} {}C'.format(temperature, u'\N{DEGREE SIGN}'))
+        print('Temperature: {:.2f} {}C'.format(temperature, u'\N{DEGREE SIGN}'))
     ser.close()
 
 
