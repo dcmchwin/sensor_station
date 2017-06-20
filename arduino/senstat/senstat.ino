@@ -16,6 +16,7 @@ union {
     byte byts[4];
 } T; //temperature in celsius
 int i; // iterator variable
+int delayMs = 1000 * 2; // delay time in ms
 
 void setup()
 {
@@ -29,16 +30,12 @@ void setup()
 
 void loop()
 {
-    delay(400);
+    delay(delayMs);
     R_therm = measSenseR(heatPin, R1);
     R_ldr = measSenseR(lightPin, R1);
     T.flt = calculate_temperature(R_therm);
     if (DEBUG){
-        Serial.print(T.flt); Serial.print("\t");
-        for (i=0; i<4; i++){
-            Serial.print(T.byts[i], DEC); Serial.print("\t");
-        }
-        Serial.println(R_ldr);
+        Serial.println(T.flt);
     }
 }
 
