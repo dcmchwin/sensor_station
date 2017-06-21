@@ -64,5 +64,11 @@ def show_recent():
     print(df.tail())
 
 
+def get_last():
+    """Get most recent entry to database."""
+    df = read_into_df()
+    return df.iloc[-1]
+
+
 if __name__ == "__main__":
     show_recent()
