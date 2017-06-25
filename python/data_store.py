@@ -3,7 +3,7 @@
 import logging
 import sqlite3
 import os
-from utils import senstat_paths, table_name, db_name
+from utils import senstat_paths, table_name, db_name, time_format
 import pandas as pd
 
 
@@ -67,7 +67,7 @@ def show_recent():
 def get_last():
     """Get most recent entry to database."""
     df = read_into_df()
-    return df.iloc[-1]
+    return df[df.index==df.index.max()]
 
 
 if __name__ == "__main__":

@@ -1,5 +1,9 @@
 /calcs.ods
 
-mydb.db
+*.db
+
+*.html
 
 *.pyc
+
+python/plot_dt_test.py
