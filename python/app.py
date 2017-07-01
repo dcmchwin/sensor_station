@@ -8,8 +8,9 @@ from bokeh.models import Range1d, ColumnDataSource
 from datetime import datetime
 import numpy as np
 import pandas as pd
+from pandas.tseries.offsets import DateOffset
 
-from utils import senstat_paths, time_format
+from utils import senstat_paths, time_format, delay_s
 from data_store import get_last, read_into_df
 
 
@@ -111,10 +112,7 @@ class HistoryPlotFigure():
 
         # Get date range in unix seconds
         now = pd.Timestamp.now()
-        ytd = now.replace(day=now.day-1)
-        
-        now = pd.Timestamp.now()
-        ytd = now.replace(day=now.day-1)
+        ytd = now - DateOffset(days=1)
         now_ms = self.convert_unix_ms(now)
         ytd_ms = self.convert_unix_ms(ytd)
 
@@ -140,9 +138,9 @@ tabhp = Panel(child=hp.fig, title="Historical Plot")
 tabs = Tabs(tabs=[ tabcw, tabhp])
 
 curdoc().add_periodic_callback(cw.get_current_weather,
-                               2000)
+                               delay_s * 1000)
 curdoc().add_periodic_callback(hp.update_data_source,
-                               2000)
+                               delay_s * 1000)
 
 curdoc().add_root(tabs)
 curdoc().title = "Home Sensor Station"

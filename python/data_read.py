@@ -7,7 +7,7 @@ from utils import time_format
 import time
 
 logger = logging.getLogger(__file__)
-logger.setLevel(logging.WARNING)
+logger.setLevel(logging.INFO)
 ch = logging.StreamHandler()
 ch.setLevel(logging.INFO)
 logger.addHandler(ch)
@@ -15,6 +15,7 @@ logger.addHandler(ch)
 class DataRead(Thread):
     def __init__(self, stop_event):
         super().__init__()
+        self.daemon = True
         self.stop_event = stop_event
         # We don't want to block the db by keeping it open
         self.db = None
@@ -73,8 +74,6 @@ def get_arduino_serial_connection(port=None,
 
     return ser
     
-
-
 if __name__ == '__main__':
     logger.info("Beginning data reader")
     stop_event = Event()

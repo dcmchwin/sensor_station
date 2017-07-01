@@ -36,3 +36,8 @@ time_format = "%Y-%m-%dT%H:%M:%S%z"
 """
 Get a ISO 8601 compatible datetime format.
 """
+
+delay_s = 300
+"""
+Read and update time delay in seconds.
+"""

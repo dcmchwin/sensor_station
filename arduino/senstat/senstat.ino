@@ -15,8 +15,9 @@ union {
     float flt;
     byte byts[4];
 } T; //temperature in celsius
-int i; // iterator variable
-int delayMs = 1000 * 2; // delay time in ms
+int i = 0; // iterator variable
+int N = 300; // number of loops between serial uploads
+int delayMs = 1000; // delay time in ms between arduino actions
 
 void setup()
 {
@@ -34,9 +35,10 @@ void loop()
     R_therm = measSenseR(heatPin, R1);
     R_ldr = measSenseR(lightPin, R1);
     T.flt = calculate_temperature(R_therm);
-    if (DEBUG){
+    if (DEBUG && (i % N == 0)){
         Serial.println(T.flt);
     }
+    i += 1;
 }
 
 float measSenseR(int pin, float R0)
